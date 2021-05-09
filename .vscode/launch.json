@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "gisapp",
+      "type": "python",
+      "request": "launch",
+      "module": "gisapp",
+      "args": ["--host", "0.0.0.0:8080"]
+    },
+    {
+      "name": "client",
+      "type": "python",
+      "request": "launch",
+      "module": "client.client"
+    }
+  ],
+  "compounds": []
+}

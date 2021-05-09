@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "vscode-debug-book2-kubernetes"
+version = "0.1.0"
+description = ""
+authors = ["Atsushi Morimoto (74th) <site@74th.tech>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+grpcio-tools = "^1.37.1"
+pyproj = "^3.0.1"
+betterproto = {version = "2.0.0b3", extras = ["compiler"]}
+
+[tool.poetry.dev-dependencies]
+invoke = "^1.5.0"
+black = {version = "^21.5b0", allow-prereleases = true}
+grpcio-tools = "^1.37.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
