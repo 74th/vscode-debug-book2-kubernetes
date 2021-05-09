@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package gisapp;
+
+service GISCalc {
+  rpc RouteLength(RouteLengthRequest) returns (RouteLengthResponse) {}
+}
+
+message Point {
+  double latitude = 1;
+  double lognitude = 2;
+}
+
+message RouteLengthRequest { repeated Point route = 1; }
+
+message RouteLengthResponse { double length = 1; }
