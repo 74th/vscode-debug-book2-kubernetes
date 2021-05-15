@@ -13,6 +13,27 @@
       "type": "python",
       "request": "launch",
       "module": "client.client"
+    },
+    {
+      "name": "Attach to Kubernetes Pod (Python)",
+      "type": "cloudcode.kubernetes",
+      "request": "attach",
+      "language": "Python",
+      "debugPort": 3000,
+      "podSelector": {
+        "app": "intermediate"
+      },
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/app"
+    },
+    {
+      "name": "Python: Remote Attach",
+      "type": "python",
+      "request": "attach",
+      "connect": { "host": "localhost", "port": 3000 },
+      "pathMappings": [
+        { "localRoot": "${workspaceFolder}", "remoteRoot": "/app" }
+      ]
     }
   ],
   "compounds": []
