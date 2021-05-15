@@ -1,0 +1,4 @@
+resources:
+  - ./backend-app.yaml
+  - ./intermediate-app.yaml
+  - ./front-app.yaml

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front
+spec:
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      containers:
+        - name: front
+          image: gcr.io/nnyn-dev/simple-post-server:latest
+          args:
+            - "--down=intermediate-service:8080"
+            - "--pos=35.685175,139.752800"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1G"
+            requests:
+              cpu: "100m"
+              memory: "200Mi"
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-service
+spec:
+  selector:
+    app: front
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

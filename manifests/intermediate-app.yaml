@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intermediate
+spec:
+  selector:
+    matchLabels:
+      app: intermediate
+  template:
+    metadata:
+      labels:
+        app: intermediate
+    spec:
+      containers:
+        - name: intermediate
+          image: gcr.io/nnyn-dev/simple-post-server:latest
+          args:
+            - "--down=backend-service:8080"
+            - "--pos=35.689634,139.692101"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1G"
+            requests:
+              cpu: "100m"
+              memory: "200Mi"
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: intermediate-service
+spec:
+  selector:
+    app: intermediate
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
