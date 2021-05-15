@@ -19,6 +19,12 @@ spec:
             - run
             - python
             - -m
+            - ptvsd
+            - --port
+            - "3000"
+            - --host
+            - 0.0.0.0
+            - -m
             - gisapp
           args:
             - "--down=backend-service:8080"

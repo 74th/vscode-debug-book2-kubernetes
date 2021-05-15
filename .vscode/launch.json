@@ -15,7 +15,7 @@
       "module": "client.client"
     },
     {
-      "name": "Attach to Kubernetes Pod (Python)",
+      "name": "cloud code attach",
       "type": "cloudcode.kubernetes",
       "request": "attach",
       "language": "Python",
@@ -27,12 +27,16 @@
       "remoteRoot": "/app"
     },
     {
-      "name": "Python: Remote Attach",
+      "name": "attach debugpy",
       "type": "python",
       "request": "attach",
-      "connect": { "host": "localhost", "port": 3000 },
+      "connect": { "host": "localhost", "port": 5678 },
       "pathMappings": [
-        { "localRoot": "${workspaceFolder}", "remoteRoot": "/app" }
+        // { "localRoot": "${workspaceFolder}", "remoteRoot": "/app" }
+        {
+          "localRoot": "${workspaceFolder}",
+          "remoteRoot": "."
+        }
       ]
     }
   ],

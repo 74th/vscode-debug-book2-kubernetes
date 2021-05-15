@@ -8,5 +8,13 @@ def build_proto(c):
         proto/gisapp.proto""")
 
 @task
-def apply(c):
-    c.run(f"""kustomize build manifests/ | kubectl apply -f -""")
+def apply_base(c):
+    c.run(f"""kustomize build manifests/base | kubectl apply -f -""")
+
+@task
+def apply_cloudcode(c):
+    c.run(f"""kustomize build manifests/cloudcode | kubectl apply -f -""")
+
+@task
+def apply_debugpy(c):
+    c.run(f"""kustomize build manifests/debugpy | kubectl apply -f -""")
