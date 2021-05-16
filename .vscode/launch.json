@@ -2,11 +2,48 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Kubernetes: Run/Debug",
+      "type": "cloudcode.kubernetes",
+      "request": "launch",
+      "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+      "profile": "cloudcode",
+      "watch": true,
+      "cleanUp": true,
+      "portForward": true,
+      "imageRegistry": "gcr.io/nnyn-dev",
+      "debug": [
+        {
+          "image": "gcr.io/nnyn-dev/simple-post-server",
+          "sourceFileMap": {
+            "${workspaceFolder}": "/app"
+          }
+        }
+      ]
+    },
+    {
+      "name": "gisapp intermediate with Kubernetes",
+      "type": "python",
+      "request": "launch",
+      "module": "gisapp",
+      "args": ["--host", "0.0.0.0:8080", "--down=backend-service:8080"],
+      "preLaunchTask": "bridge-to-kubernetes.resource",
+      "env": {
+        "GRPC_DNS_RESOLVER": "native"
+      }
+    },
+    {
       "name": "gisapp",
       "type": "python",
       "request": "launch",
       "module": "gisapp",
       "args": ["--host", "0.0.0.0:8080"]
+    },
+    {
+      "name": "gisapp intermediate",
+      "type": "python",
+      "request": "launch",
+      "module": "gisapp",
+      "args": ["--host", "0.0.0.0:8080", "--down=backend-service:8080"]
     },
     {
       "name": "client",
@@ -30,9 +67,11 @@
       "name": "attach debugpy",
       "type": "python",
       "request": "attach",
-      "connect": { "host": "localhost", "port": 5678 },
+      "connect": {
+        "host": "localhost",
+        "port": 5678
+      },
       "pathMappings": [
-        // { "localRoot": "${workspaceFolder}", "remoteRoot": "/app" }
         {
           "localRoot": "${workspaceFolder}",
           "remoteRoot": "."

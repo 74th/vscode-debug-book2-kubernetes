@@ -1,0 +1,26 @@
+apiVersion: skaffold/v2beta15
+kind: Config
+metadata:
+  name: vscode-debug-book--kubernetes
+build:
+  artifacts:
+    - image: gcr.io/nnyn-dev/simple-post-server
+      docker:
+        dockerfile: Dockerfile
+  tagPolicy:
+    sha256: {}
+deploy:
+  kustomize:
+    paths:
+      - manifests/base
+profiles:
+  - name: cloudcode
+    deploy:
+      kustomize:
+        paths:
+          - manifests/cloudcode
+  - name: debugpy
+    deploy:
+      kustomize:
+        paths:
+          - manifests/debugpy

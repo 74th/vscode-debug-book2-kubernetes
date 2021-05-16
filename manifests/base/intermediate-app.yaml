@@ -14,12 +14,6 @@ spec:
       containers:
         - name: intermediate
           image: gcr.io/nnyn-dev/simple-post-server:latest
-          command:
-            - poetry
-            - run
-            - python
-            - -m
-            - gisapp
           args:
             - "--down=backend-service:8080"
             - "--pos=35.689634,139.692101"
