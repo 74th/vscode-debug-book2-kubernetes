@@ -2,11 +2,25 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "gisapp intermediate with Kubernetes",
+      "type": "python",
+      "request": "launch",
+      "module": "gisapp",
+      "args": [
+        "--host",
+        "0.0.0.0:8080",
+        "--down=backend-service:8080"
+      ],
+      "preLaunchTask": "bridge-to-kubernetes.resource",
+      "env": {
+        "GRPC_DNS_RESOLVER": "native"
+      }
+    },
+    {
       "name": "Kubernetes: Run/Debug",
       "type": "cloudcode.kubernetes",
       "request": "launch",
       "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
-      "profile": "cloudcode",
       "watch": true,
       "cleanUp": true,
       "portForward": true,
@@ -21,29 +35,25 @@
       ]
     },
     {
-      "name": "gisapp intermediate with Kubernetes",
-      "type": "python",
-      "request": "launch",
-      "module": "gisapp",
-      "args": ["--host", "0.0.0.0:8080", "--down=backend-service:8080"],
-      "preLaunchTask": "bridge-to-kubernetes.resource",
-      "env": {
-        "GRPC_DNS_RESOLVER": "native"
-      }
-    },
-    {
       "name": "gisapp",
       "type": "python",
       "request": "launch",
       "module": "gisapp",
-      "args": ["--host", "0.0.0.0:8080"]
+      "args": [
+        "--host",
+        "0.0.0.0:8080"
+      ]
     },
     {
       "name": "gisapp intermediate",
       "type": "python",
       "request": "launch",
       "module": "gisapp",
-      "args": ["--host", "0.0.0.0:8080", "--down=backend-service:8080"]
+      "args": [
+        "--host",
+        "0.0.0.0:8080",
+        "--down=backend-service:8080"
+      ]
     },
     {
       "name": "client",
@@ -58,7 +68,7 @@
       "language": "Python",
       "debugPort": 3000,
       "podSelector": {
-        "app": "intermediate"
+        "app": "backend"
       },
       "localRoot": "${workspaceFolder}",
       "remoteRoot": "/app"

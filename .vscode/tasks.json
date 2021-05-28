@@ -9,7 +9,7 @@
       "ports": [
         8080
       ],
-      "targetCluster": "gke_nnyn-dev_asia-northeast1_autopilot-cluster-1",
+      "targetCluster": "gke_nnyn-dev_asia-northeast1_autopilot",
       "targetNamespace": "book2",
       "useKubernetesServiceEnvironmentVariables": false
     }

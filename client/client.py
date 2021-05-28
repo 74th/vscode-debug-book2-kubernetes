@@ -3,7 +3,9 @@ from proto import Point, GisCalcStub
 
 from grpclib.client import Channel
 
+# channel = Channel("127.1.1.2", 8080)
 channel = Channel("127.0.0.1", 8080)
+# channel = Channel("front-service", 8080)
 client = GisCalcStub(channel)
 
 async def main():

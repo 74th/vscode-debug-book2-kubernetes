@@ -1,35 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: intermediate
+  name: backend
 spec:
   selector:
     matchLabels:
-      app: intermediate
-  replicas: 2
+      app: backend
   template:
     metadata:
       labels:
-        app: intermediate
+        app: backend
     spec:
       containers:
-        - name: intermediate
+        - name: backend
           image: gcr.io/nnyn-dev/simple-post-server:latest
-          command:
-            # - poetry
-            # - run
-            - python
-            - -m
-            # - ptvsd
-            # - --port
-            # - "3000"
-            # - --host
-            # - 0.0.0.0
-            # - -m
-            - gisapp
-          args:
-            - "--down=backend-service:8080"
-            - "--pos=35.689634,139.692101"
           resources:
             limits:
               cpu: "500m"
@@ -43,10 +27,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: intermediate-service
+  name: backend-service
 spec:
   selector:
-    app: intermediate
+    app: backend
   ports:
     - protocol: TCP
       port: 8080

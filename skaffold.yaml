@@ -12,15 +12,4 @@ build:
 deploy:
   kustomize:
     paths:
-      - manifests/base
-profiles:
-  - name: cloudcode
-    deploy:
-      kustomize:
-        paths:
-          - manifests/cloudcode
-  - name: debugpy
-    deploy:
-      kustomize:
-        paths:
-          - manifests/debugpy
+      - manifests/cloudcode
