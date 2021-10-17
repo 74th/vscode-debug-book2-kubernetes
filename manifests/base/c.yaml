@@ -1,18 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: deploy-c
 spec:
   selector:
     matchLabels:
-      app: backend
+      app: app-c
+  replicas: 2
   template:
     metadata:
       labels:
-        app: backend
+        app: app-c
     spec:
       containers:
-        - name: backend
+        - name: app-c
           image: gcr.io/nnyn-dev/simple-post-server:latest
           resources:
             limits:
@@ -27,10 +28,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: service-c
 spec:
   selector:
-    app: backend
+    app: app-c
   ports:
     - protocol: TCP
       port: 8080

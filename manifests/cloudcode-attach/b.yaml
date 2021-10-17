@@ -1,22 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: intermediate
+  name: app-b
 spec:
   selector:
     matchLabels:
-      app: intermediate
+      app: app-b
   template:
     metadata:
       labels:
-        app: intermediate
+        app: app-b
     spec:
       containers:
-        - name: intermediate
+        - name: app-b
           image: gcr.io/nnyn-dev/simple-post-server:latest
-          args:
-            - "--down=backend-service:8080"
-            - "--pos=35.689634,139.692101"
+          command:
+            - python
+            - -m
+            - ptvsd
+            - --host
+            - "0.0.0.0"
+            - --port
+            - "3000"
+            - -m
+            - "gisapp"
           resources:
             limits:
               cpu: "500m"
@@ -30,10 +37,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: intermediate-service
+  name: service-b
 spec:
   selector:
-    app: intermediate
+    app: app-b
   ports:
     - protocol: TCP
       port: 8080

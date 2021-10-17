@@ -1,7 +1,12 @@
+import os
 import argparse
 import asyncio
 from proto import Point
 from .app import GisAPP, GisAPPIntermediator
+
+if os.environ.get("ENABLE_DEBUG", "false").lower() == "true":
+    import debugpy
+    debugpy.listen(("0.0.0.0", 5678))
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--down", default=None)

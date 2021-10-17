@@ -1,4 +1,4 @@
 resources:
   - ../base
 patches:
-  - ./intermediate-app.yaml
+  - ./b.yaml

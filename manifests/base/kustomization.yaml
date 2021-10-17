@@ -1,4 +1,4 @@
 resources:
-  - ./backend-app.yaml
-  - ./intermediate-app.yaml
-  - ./front-app.yaml
+  - ./a.yaml
+  - ./b.yaml
+  - ./c.yaml

@@ -31,10 +31,15 @@ class GisAPPIntermediator(GisCalcBase):
         self._down_stream = GisCalcStub(self._down_stream_channel)
 
     async def route_length(self, *, route: list["Point"] = []) -> RouteLengthResponse:
+        # upstream から呼ばれる
 
         route.append(self._point)
 
-        return await self._down_stream.route_length(route=route)
+        # downstream で仕事をさせる
+        down_stream_result = await self._down_stream.route_length(route=route)
+
+        # upstream に戻す
+        return down_stream_result
 
     async def serve(self, host: str, port: int):
         server = Server([self])

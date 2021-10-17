@@ -1,21 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: front
+  name: deploy-a
 spec:
   selector:
     matchLabels:
-      app: front
+      app: app-a
+  replicas: 2
   template:
     metadata:
       labels:
-        app: front
+        app: app-a
     spec:
       containers:
-        - name: front
+        - name: app-a
           image: gcr.io/nnyn-dev/simple-post-server:latest
           args:
-            - "--down=intermediate-service:8080"
+            - "--down=service-b:8080"
             - "--pos=35.685175,139.752800"
           resources:
             limits:
@@ -30,10 +31,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: front-service
+  name: service-a
 spec:
   selector:
-    app: front
+    app: app-a
   ports:
     - protocol: TCP
       port: 8080

@@ -1,29 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: deploy-b
 spec:
   selector:
     matchLabels:
-      app: backend
+      app: app-b
+  replicas: 2
   template:
     metadata:
       labels:
-        app: backend
+        app: app-b
     spec:
       containers:
-        - name: backend
+        - name: app-b
           image: gcr.io/nnyn-dev/simple-post-server:latest
-          command:
-            - python
-            - -m
-            - ptvsd
-            - --host
-            - "0.0.0.0"
-            - --port
-            - "3000"
-            - -m
-            - "gisapp"
+          args:
+            - "--down=service-c:8080"
+            - "--pos=35.689634,139.692101"
+          env:
+            - name: ENABLE_DEBUG
+              value: "false"
           resources:
             limits:
               cpu: "500m"
@@ -37,10 +34,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: service-b
 spec:
   selector:
-    app: backend
+    app: app-b
   ports:
     - protocol: TCP
       port: 8080

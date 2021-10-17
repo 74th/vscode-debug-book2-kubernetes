@@ -3,9 +3,7 @@ from proto import Point, GisCalcStub
 
 from grpclib.client import Channel
 
-# channel = Channel("127.1.1.2", 8080)
 channel = Channel("127.0.0.1", 8080)
-# channel = Channel("front-service", 8080)
 client = GisCalcStub(channel)
 
 async def main():
@@ -14,7 +12,8 @@ async def main():
         Point(latitude=35.710063, longitude=139.81070),
         ]
     res = await client.route_length(route=route)
-    print(res.length)
+    print(f"Answer: {res.length}")
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
+channel.close()
